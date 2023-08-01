@@ -23,3 +23,5 @@ I snip parts of the pdf file to turn it into an image while also grouping inputs
 ## Future plans:
       Create an OCR program
       Incorporate the output from the helper methods directly to the main program
+      Create a program that will translate PDF files into Images
+      Create a program that will crop certain area of the Images
