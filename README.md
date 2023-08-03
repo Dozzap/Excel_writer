@@ -1,5 +1,8 @@
 ﻿# Excel writer
-       **Background**:
+      This is a program that I use for my work. This program works as your helper for inputing files in an Excel Sheet. I am given a folder with pdf files containing handwritten notes regarding the inventory of things we keep track at work (for the sake of anonymosity). I am tasked with inputing this data in a database.
+
+It snip parts of the pdf file to turn it into an image while also grouping inputs given their column. I then use an [OCR website](https://www.pen-to-print.com/handwriting-to-text-online-ocr/) to read the data from the images and I double check the data to make sure the OCR did its job right. I Then use the helper methods to clean up the data and later put into the excel sheet using the main program.
+## Background:
 This is a program that I use for my work. This program works as your helper for inputing files in an Excel Sheet. I am given a folder with pdf files containing handwritten notes regarding the inventory of things we keep track at work (for the sake of anonymosity). I am tasked with inputing this data in a database.
 
 It snip parts of the pdf file to turn it into an image while also grouping inputs given their column. I then use an [OCR website](https://www.pen-to-print.com/handwriting-to-text-online-ocr/) to read the data from the images and I double check the data to make sure the OCR did its job right. I Then use the helper methods to clean up the data and later put into the excel sheet using the main program.
