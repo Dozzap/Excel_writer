@@ -14,14 +14,18 @@ I snip parts of the pdf file to turn it into an image while also grouping inputs
 
 ## Current Progress:
 
-    Helper functions are created. 
+Update 2:
+      2 (pdf_to_image and crop_image) have been merged into one
+      
+Update 1:
+      Helper functions are created. 
 
-    stringToList: This helper method takes in a string of mixed integer and string. This then creates an array that will store the entries taken from the string input
+      stringToList: This helper method takes in a string of mixed integer and string. This then creates an array that will store the entries taken from the string input
                   ### check measures:
                                   Given inputs from different pages, This will keep track of how many entries are in the array
 
 ## Future plans:
-      Create an OCR program
-      Incorporate the output from the helper methods directly to the main program
-      Create a program that will translate PDF files into Images
-      Create a program that will crop certain area of the Images
+      Create an OCR program      
+      Incorporate the output from the helper methods directly to the main program      (Almost complete)
+      ✅Create a program that will translate PDF files into Images   
+      ✅Create a program that will crop certain area of the Images
