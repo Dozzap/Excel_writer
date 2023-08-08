@@ -4,7 +4,7 @@ input2 = ""
 input3 = ""
 input4 = ""
 input5 = ""
-p = input1 + input2 + input3 input4 + input5
+p = input1 + input2 + input3 + input4 + input5
 def clean_data(input_data):
      transformed_string = input_data.replace("5", "S").replace("0", "O").upper().split()
 
