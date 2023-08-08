@@ -25,6 +25,8 @@ Update 1:
                                   Given inputs from different pages, This will keep track of how many entries are in the array
 
 ## Future plans:
+
+      Make the program automatically delete the image files after the compilation to pdf
       Create an OCR program      
       Incorporate the output from the helper methods directly to the main program      (Almost complete)
       ✅Create a program that will translate PDF files into Images   
