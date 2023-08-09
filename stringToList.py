@@ -4,7 +4,7 @@ input2 = ""
 input3 = ""
 input4 = ""
 input5 = ""
-p = input1 + input2 + input3 input4 + input5
+p = input1 + input2 + input3+ input4 + input5
 
 
 def stringToList(input_string):
