@@ -15,7 +15,7 @@ def stringToList(input_string):
     # Create a Python array by converting integers or keeping the original entry
     python_array = []
     for entry in entries:
-        if len(str(entry)) < 3:
+        if len(str(entry)) < 3 or ("/" in str(entry)):
             print("error")
             break
         if entry.isdigit():
