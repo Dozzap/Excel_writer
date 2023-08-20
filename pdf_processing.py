@@ -3,22 +3,26 @@ from PIL import Image
 from PyPDF2 import PdfWriter, PdfReader
 import os
 
-def convert_pdf_to_images(X):
-    poppler_path = r"C:\Users\dhyla\OneDrive\Desktop\prog\Release-23.07.0-0\poppler-23.07.0\Library\bin"
-    pdf_name = r'C:\Users\dhyla\OneDrive\Desktop\Excel_writer\example\NCB120B C14D' + str(X) + '.pdf'
-    new_folder_path = r'C:\Users\dhyla\OneDrive\Desktop\Excel_writer\example\img\D' + str(X)
+POPPLER_PATH = r"C:\Users\dhyla\OneDrive\Desktop\prog\Release-23.07.0-0\poppler-23.07.0\Library\bin"
+BASE_PDF_PATH = r'C:\Users\dhyla\OneDrive\Desktop\Excel_writer\120G\Cabinet 10\NCB120G C10D{}.pdf'
+BASE_IMAGE_FOLDER = r'C:\Users\dhyla\OneDrive\Desktop\Excel_writer\example\img\D{}'
+
+
+def convert_pdf_to_images(drawer_number):
+    pdf_name = BASE_PDF_PATH.format(drawer_number)
+    new_folder_path = BASE_IMAGE_FOLDER.format(drawer_number)
+
     if not os.path.exists(new_folder_path):
         os.makedirs(new_folder_path)
 
-    images = convert_from_path(pdf_name, poppler_path=poppler_path)
+    images = convert_from_path(pdf_name, poppler_path=POPPLER_PATH)
 
     for i, image in enumerate(images):
-        image_path = 'page' + str(i) + '.jpg'
+        image_path = f'page{i}.jpg'
         full_image_path = os.path.join(new_folder_path, image_path)
         image.save(full_image_path, 'JPEG')
         print(f"Saved {full_image_path}")
-
-    print("Current working directory:", os.getcwd())
+    return len(images)
 
 def crop_images(input_directory, start_side):
     crop_folder = os.path.join(input_directory, 'cropimg')
@@ -28,9 +32,9 @@ def crop_images(input_directory, start_side):
     for index, filename in enumerate(sorted(os.listdir(input_directory))):
         if filename.endswith('.jpg'):
             if (start_side == "left" and index % 2 != 0) or (start_side == "right" and index % 2 == 0):
-                left, upper, right, lower = 240, 236, 532, 1789
+                left, upper, right, lower = 210, 226, 592, 1789
             else:
-                left, upper, right, lower = 144, 237, 451, 1789
+                left, upper, right, lower = 114, 227, 451, 1789
 
             crop_area = (left, upper, right, lower)
             image_path = os.path.join(input_directory, filename)
@@ -40,6 +44,10 @@ def crop_images(input_directory, start_side):
             cropped_image.save(os.path.join(crop_folder, cropped_filename))
             print(f"Cropped and saved {cropped_filename}")
 
+    merge_and_clean(crop_folder)
+
+
+def merge_and_clean(crop_folder):
     pdfs = []
 
     for filename in sorted(os.listdir(crop_folder)):
@@ -65,16 +73,30 @@ def crop_images(input_directory, start_side):
 
     for pdf_path in pdfs:
         os.remove(pdf_path)
-
     print("Deleted individual PDF files.")
 
-def process_pdf(drawer_number, start_side="right"):
-    pdf_name = r'C:\Users\dhyla\OneDrive\Desktop\Excel_writer\example\NCB120B C14D' + str(drawer_number) + '.pdf'
-    input_directory = r'C:\Users\dhyla\OneDrive\Desktop\Excel_writer\example\img\D' + str(drawer_number)
-
+def process_pdf(drawer_number, start_side):
+    input_directory = BASE_IMAGE_FOLDER.format(drawer_number)
     convert_pdf_to_images(drawer_number)
     crop_images(input_directory, start_side)
 
-# Example usage
-drawer_number = 12
-process_pdf(drawer_number, start_side="right")
+def process_pdfs_for_specified_drawers(drawer_list, initial_side="left"):
+    start_side = initial_side
+    
+    for drawer_number in drawer_list:
+        num_pages = convert_pdf_to_images(drawer_number)
+        process_pdf(drawer_number, start_side)
+        
+        # If the number of pages is odd, toggle the side for the next drawer.
+        if num_pages % 2 != 0:
+            start_side = "right" if start_side == "left" else "left"
+
+
+# Example usage:
+drawer_list = [i for i in range(1,12)]  # Suppose 3, 6, 8, 9, and 11 are missing.
+process_pdfs_for_specified_drawers(drawer_list, initial_side="left")
+
+
+
+
+
